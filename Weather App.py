@@ -10,8 +10,6 @@ class WeatherApp:
     def __init__(self, master):
         self.width = 600
         self.height = 550
-
-
         self.canvas = Canvas(master, height= self.height, width= self.width)
         self.canvas.pack()
         self.background_image = PhotoImage(file='canvaspic.png')
@@ -33,19 +31,11 @@ class WeatherApp:
         self.label3 = Canvas(self.frame2, bg="white", bd=0, highlightthickness=0)
         self.label3.place(relx=0.7, rely=0.1, relheight=0.7, relwidth=0.3)
 
-
-
-
-
-
-
     def get_weather(self):
         try:
             url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=85071fc9957db8d8bf613dfd2b66c598"
             city = self.entry1.get()
-
             r = requests.get(url.format(city)).json()
-
             city_ = city
             temp = r["main"]["temp"]
             conditions = r["weather"][0]["description"]
@@ -53,12 +43,6 @@ class WeatherApp:
             final_output = 'City: %s \nConditions: %s \nTemperature (°F): %s' % (city_, conditions, temp)
             self.label2["text"] = final_output
             self.open_image(icon_)
-
-
-
-
-
-
         except:
             self.label2["text"] = "There was a problem retrieving that information"
 
@@ -68,13 +52,6 @@ class WeatherApp:
         self.label3.delete("all")
         self.label3.image = img
         self.label3.create_image(0, 0, anchor='nw', image=img)
-
-
-
-
-
-
-
 
 root = Tk()
 root.title("Weather App")
